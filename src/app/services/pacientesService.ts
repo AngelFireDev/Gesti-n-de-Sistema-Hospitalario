@@ -1,26 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-export interface Paciente {
-  id: number;
-  nombre: string;
-  edad: number;
-  diagnostico: string;
-}
+import { Paciente } from '../models/pacientes';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PacienteService {
-  private apiUrl = 'http://localhost:0000/pacientes'; 
+  private apiUrl = 'http://localhost:3000/api/pacientes'; 
 
   constructor(private http: HttpClient) {}
 
   getPacientes(): Observable<Paciente[]> {
-    return this.http.get<Paciente[]>(this.apiUrl);
+    return this.http.get<Paciente[]>(`${this.apiUrl}?nocache=${new Date().getTime()}`);
   }
 
+  getPacienteById(id: number): Observable<Paciente> {
+    return this.http.get<Paciente>(`${this.apiUrl}/${id}`);
+  }
+
+  createPacientes(paciente: Paciente): Observable<Paciente> {
+    return this.http.post<Paciente>(this.apiUrl, paciente);
+  }
+
+  updatePaciente(id: number, paciente: Paciente): Observable<Paciente> {
+    return this.http.put<Paciente>(`${this.apiUrl}/${id}`, paciente);
+  }
+
+  
   eliminarPaciente(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }

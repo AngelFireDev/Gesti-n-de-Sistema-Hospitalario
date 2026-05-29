@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, Routes } from '@angular/router';
+import { Router } from '@angular/router';
 import { PacienteService } from '../../../services/pacientesService';
-import { Paciente } from '../../../services/pacientesService';
+import { Paciente } from '../../../models/pacientes';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-pacientes-list',
@@ -17,7 +18,8 @@ export class PacientesListComponent implements OnInit {
   constructor
   (
     private pacienteService: PacienteService,
-    private router: Router
+    private router: Router,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -30,12 +32,13 @@ export class PacientesListComponent implements OnInit {
 
   cargarPacientes() {
     this.pacienteService.getPacientes().subscribe(data => {
-      this.pacientes = data;
+      this.pacientes = [...data];
+      this.cd.detectChanges(); 
     });
   }
 
   editarPaciente(paciente: Paciente) {
-    this.router.navigate(['pacientes/edit'])
+    this.router.navigate([`/pacientes/edit/${paciente.id}`])
   }
 
   eliminarPaciente(id: number) {

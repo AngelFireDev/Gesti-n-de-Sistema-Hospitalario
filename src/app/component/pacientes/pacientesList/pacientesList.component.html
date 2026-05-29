@@ -30,7 +30,7 @@
   <h2 class="text-primary">Lista de Pacientes</h2>
 
   <div class="d-flex justify-content-end mb-3">
-    <button class="btn btn-sucess" (click)="crearPaciente()">
+    <button class="btn btn-success" (click)="crearPaciente()">
       <i class="bi bi-person-plus me-2"></i> Crear Paciente
     </button>
   </div>
@@ -38,38 +38,37 @@
   <table class="table table-striped mt-3">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Nombre</th>
+        <th>Id</th>
+        <th>Documento</th>
+        <th>Nombre Completo</th>
         <th>Edad</th>
-        <th>Diagnóstico</th>
+        <th>Diagnostico</th>
+        <th>Fecha Nacimiento</th>
+        <th>Genero</th>
+        <th>Telefono</th>
+        <th>Dirección</th>
+        <th>Email</th>
+        <th>Tipo Sangre</th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let paciente of pacientes">
-        <td>{{ paciente.id }}</td>
+        <td>{{ paciente.id}}</td>
+        <td>{{ paciente.documento }}</td>
         <td>{{ paciente.nombre }}</td>
         <td>{{ paciente.edad }}</td>
         <td>{{ paciente.diagnostico }}</td>
-        <td>
-          <div class="dropdown">
-            <button class="btn btn-light btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-three-dots-vertical"></i>
-            </button>
-            <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item d-flex align-items-center" (click)="editarPaciente(paciente)">
-                  <i class="bi bi-pencil-square me-2 text-primary"></i> Editar
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item d-flex align-items-center text-danger" (click)="eliminarPaciente(paciente.id)">
-                  <i class="bi bi-trash me-2"></i> Eliminar
-                </a>
-              </li>
-            </ul>
-          </div>
-        </td>
+        <td>{{ paciente.fecha_nacimiento }}</td>
+        <td>{{ paciente.genero }}</td>
+        <td>{{ paciente.telefono }}</td>
+        <td>{{ paciente.direccion }}</td>
+        <td>{{ paciente.email }}</td>
+        <td>{{ paciente.tipo_sangre }}</td>
+         <td>
+        <button type="button" class="btn btn-warning" (click)="editarPaciente(paciente)"><i class="bi bi-pencil-square"></i></button>
+        <button type="button" class="btn btn-danger" (click)="eliminarPaciente(paciente.id)"><i class="bi bi-trash"></i></button>
+      </td>
       </tr>
     </tbody>
   </table>
