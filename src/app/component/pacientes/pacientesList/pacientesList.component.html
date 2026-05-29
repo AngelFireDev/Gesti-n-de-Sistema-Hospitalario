@@ -1,0 +1,77 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="https://advantecnia.com/wp-content/uploads/2024/02/imagen-1-1024x682.jpg" alt="Logo"
+        width="80" height="40" class="me-2">
+      <span class="fw-bold">Gestión Hospitalaria</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHospital"
+      aria-controls="navbarHospital" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarHospital">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item">
+          <a class="nav-link active" href="/">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-light ms-2" href="#login">
+            <i class="bi bi-person-circle"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <h2 class="text-primary">Lista de Pacientes</h2>
+
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-sucess" (click)="crearPaciente()">
+      <i class="bi bi-person-plus me-2"></i> Crear Paciente
+    </button>
+  </div>
+
+  <table class="table table-striped mt-3">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Diagnóstico</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let paciente of pacientes">
+        <td>{{ paciente.id }}</td>
+        <td>{{ paciente.nombre }}</td>
+        <td>{{ paciente.edad }}</td>
+        <td>{{ paciente.diagnostico }}</td>
+        <td>
+          <div class="dropdown">
+            <button class="btn btn-light btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-three-dots-vertical"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item d-flex align-items-center" (click)="editarPaciente(paciente)">
+                  <i class="bi bi-pencil-square me-2 text-primary"></i> Editar
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item d-flex align-items-center text-danger" (click)="eliminarPaciente(paciente.id)">
+                  <i class="bi bi-trash me-2"></i> Eliminar
+                </a>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>

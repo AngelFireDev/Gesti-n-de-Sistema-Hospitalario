@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="https://advantecnia.com/wp-content/uploads/2024/02/imagen-1-1024x682.jpg" alt="Logo"
+        width="80" height="40" class="me-2">
+      <span class="fw-bold">Gestión Hospitalaria</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHospital"
+      aria-controls="navbarHospital" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarHospital">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item">
+          <a class="nav-link active" href="/">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-light ms-2" href="#login">
+            <i class="bi bi-person-circle"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <h2 class="text-primary">Editar Paciente</h2>
+
+  <form (ngSubmit)="guardarPaciente()" class="row g-3 mt-3">
+    <!-- Nombre -->
+    <div class="col-md-6">
+      <label for="nombre" class="form-label">Nombre completo</label>
+      <input type="text" id="nombre" class="form-control" name="nombre" required>
+    </div>
+
+    <!-- Edad -->
+    <div class="col-md-3">
+      <label for="edad" class="form-label">Edad</label>
+      <input type="number" id="edad" class="form-control" name="edad" required>
+    </div>
+    
+
+    <div class="col-12 d-flex justify-content-end mt-3">
+      <button type="submit" class="btn btn-success me-2">
+        <i class="bi bi-check-circle me-1"></i> Guardar
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="cancelar()">
+        <i class="bi bi-x-circle me-1"></i> Cancelar
+      </button>
+    </div>
+  </form>
+</div>
