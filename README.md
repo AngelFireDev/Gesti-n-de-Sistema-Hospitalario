@@ -57,3 +57,26 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Backend (Node.js + MySQL)
+
+El backend fue agregado en la carpeta `backend/` con API REST para:
+
+- autenticacion (`/api/auth/login`)
+- pacientes
+- medicos
+- hospitales
+- citas
+- historial medico
+
+Pasos rapidos:
+
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+Servidor por defecto: `http://localhost:3000`
+
+Puedes ver mas detalles en `backend/README.md`.
