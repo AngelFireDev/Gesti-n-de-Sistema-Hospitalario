@@ -10,26 +10,21 @@ import { SuccessDialogComponent } from '../../dialog';
 @Component({
   selector: 'app-pacientes-create',
   standalone: true,
-  imports: 
-  [
-    CommonModule,
-    ReactiveFormsModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './pacientesCreate.component.html',
-  styleUrls: ['./pacientesCreate.component.css']
+  styleUrls: ['./pacientesCreate.component.css'],
 })
 export class PacientesCreateComponent {
-  form:FormGroup;
+  form: FormGroup;
 
-  constructor
-  (
+  constructor(
     private router: Router,
     private pacienteService: PacienteService,
     private fb: FormBuilder,
     private dialog: MatDialog,
   ) {
     this.form = this.fb.group({
-      documento:['',Validators.required],
+      documento: ['', Validators.required],
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       fecha_nacimiento: ['', Validators.required],
@@ -37,13 +32,13 @@ export class PacientesCreateComponent {
       telefono: [''],
       direccion: [''],
       email: ['', [Validators.email]],
-      tipo_sangre: ['', Validators.required]
+      tipo_sangre: ['', Validators.required],
     });
   }
 
-  guardarPaciente() {    
+  guardarPaciente() {
     const nuevoPaciente: Paciente = {
-      id : 0,
+      id: 0,
       documento: this.form.value.documento,
       nombre: this.form.value.nombre,
       apellido: this.form.value.apellido,
@@ -52,22 +47,32 @@ export class PacientesCreateComponent {
       telefono: this.form.value.telefono,
       direccion: this.form.value.direccion,
       email: this.form.value.email,
-      tipo_sangre: this.form.value.tipo_sangre
+      tipo_sangre: this.form.value.tipo_sangre,
     };
     this.pacienteService.createPacientes(nuevoPaciente).subscribe({
       next: () => {
-        this.dialog.open(SuccessDialogComponent).afterClosed().subscribe(() => {
-          this.router.navigate(['/pacientes']).then(() => {
-            window.location.reload()
-          }); 
-        });
+        this.dialog
+          .open(SuccessDialogComponent, {
+            data: {
+              titulo: 'Paciente guardado',
+              mensaje: 'El paciente se guardó exitosamente en la base de datos.',
+              icono: 'check_circle',
+              color: '#4caf50',
+            },
+          })
+          .afterClosed()
+          .subscribe(() => {
+            this.router.navigate(['/pacientes']).then(() => {
+              window.location.reload();
+            });
+          });
       },
       error: (err) => {
         console.error('Error al crear paciente:', err);
-      }
+      },
     });
   }
-
+  
   cancelar() {
     this.router.navigate(['/pacientes']);
   }

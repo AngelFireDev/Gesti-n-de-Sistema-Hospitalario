@@ -75,8 +75,18 @@ export class PacientesEditComponent implements OnInit {
     diagnostico: "",
     };
     this.pacienteService.updatePaciente(this.pacienteId, pacienteActualizado).subscribe({
-      next: () => {
-        this.dialog.open(SuccessDialogComponent).afterClosed().subscribe(() => {
+       next: () => {
+        this.dialog
+          .open(SuccessDialogComponent, {
+            data: {
+              titulo: 'Paciente modificado',
+              mensaje: 'El paciente se modifico exitosamente en la base de datos.',
+              icono: 'check_circle',
+              color: '#4caf50',
+            },
+          })
+          .afterClosed()
+          .subscribe(() => {
         this.router.navigate(['/pacientes']).then(() => {
           window.location.reload()
         }); 

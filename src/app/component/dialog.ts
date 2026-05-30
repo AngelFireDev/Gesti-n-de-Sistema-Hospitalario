@@ -1,20 +1,27 @@
-import { Component } from '@angular/core';
-import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+
+export interface DialogData {
+  titulo: string;
+  mensaje: string;
+  icono: string;
+  color: string;
+}
 
 @Component({
   selector: 'app-success-dialog',
   standalone: true,
-  imports: [MatDialogModule, MatButtonModule,MatIconModule],
+  imports: [MatDialogModule, MatButtonModule, MatIconModule],
   template: `
-      <div class="dialog-header">
-      <mat-icon class="icon-success">check_circle</mat-icon>
-      <h2 class="title">Paciente guardado</h2>
+    <div class="dialog-header" [style.background-color]="data.color">
+      <mat-icon class="icon">{{data.icono}}</mat-icon>
+      <h2 class="title">{{data.titulo}}</h2>
     </div>
 
     <mat-dialog-content class="mat-typography">
-      <p>El paciente se guardó exitosamente en la base de datos.</p>
+      <p>{{data.mensaje}}</p>
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">
@@ -27,11 +34,10 @@ import { MatIconModule } from '@angular/material/icon';
     .dialog-header {
       display: flex;
       align-items: center;
-      background-color: #4caf50;
       color: white;
       padding: 12px;
     }
-    .icon-success {
+    .icon {
       margin-right: 8px;
     }
     .title {
@@ -41,7 +47,11 @@ import { MatIconModule } from '@angular/material/icon';
   `]
 })
 export class SuccessDialogComponent {
-  constructor(private dialogRef: MatDialogRef<SuccessDialogComponent>) {}
+  constructor(
+    private dialogRef: MatDialogRef<SuccessDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {}
+
   cerrar() {
     this.dialogRef.close();
   }
